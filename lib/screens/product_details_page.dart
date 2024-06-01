@@ -131,7 +131,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                      itemCount: 5,
                      itemSize: 18,
                      unratedColor: Colors.black54,
-                     itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                     itemPadding: const EdgeInsets.symmetric(horizontal: 1.0),
                      itemBuilder: (context, _) => const Icon(
                        Icons.star,
                        color: Colors.amber,

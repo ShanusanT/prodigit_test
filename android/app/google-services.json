@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "777739309208",
+    "project_id": "prodigit-test",
+    "storage_bucket": "prodigit-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777739309208:android:0675d095aa526c663840ed",
+        "android_client_info": {
+          "package_name": "com.prodigittest.prodigit_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "777739309208-a7njhebkt0m6mjjn3ahfbuoi6i9v1ski.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsZu5WXk9mUwX-4_zCwk3UyYoMXu6XlFs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "777739309208-a7njhebkt0m6mjjn3ahfbuoi6i9v1ski.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
