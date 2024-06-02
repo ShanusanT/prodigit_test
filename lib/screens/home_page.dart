@@ -6,6 +6,7 @@ import 'package:prodigit_test/screens/product_details_page.dart';
 import 'package:prodigit_test/services/api_service.dart';
 import 'package:prodigit_test/services/authentication_service.dart';
 import 'package:prodigit_test/utils/colors.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -151,10 +152,120 @@ class _HomePageState extends State<HomePage> {
                     style: Theme.of(context).textTheme.bodyLarge,
             ),);
           }
-          return const Center(child: CircularProgressIndicator(color: brandColor,));
+          return const LoadingEffect();
         },
       ),
     );
   }
 }
 
+
+
+class LoadingEffect extends StatelessWidget {
+  const LoadingEffect({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 14,
+            crossAxisSpacing: 14,
+            mainAxisExtent: 275
+
+        ),
+        itemCount: 8,
+        itemBuilder: (context, index) {
+          return Container(
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: SingleChildScrollView(
+
+              child: Column(
+                children: [
+
+                  Shimmer.fromColors(
+                    baseColor: Colors.grey.shade200,
+                    highlightColor: Colors.grey.shade100,
+                    enabled: true,
+                    child: Container(
+                      height: 120,
+                      margin: const EdgeInsets.all(16),
+                      width: double.infinity,
+                      color: Colors.grey.shade200,
+                    ),
+                  ),
+
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Shimmer.fromColors(
+                        baseColor: Colors.grey.shade200,
+                        highlightColor: Colors.grey.shade100,
+                        enabled: true,
+                        child: Container(
+                          height: 30,
+                          width: double.infinity,
+                          color: Colors.grey.shade200,
+                        ),
+                      ),
+                    ),
+                  ),
+
+
+
+                  const SizedBox(height: 8,),
+
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Shimmer.fromColors(
+                        baseColor: Colors.grey.shade200,
+                        highlightColor: Colors.grey.shade100,
+                        enabled: true,
+                        child: Container(
+                          height: 15,
+                          width: 90,
+                          color: Colors.grey.shade200,
+                        ),
+                      ),
+                    ),
+                  ),
+
+
+
+                  const SizedBox(height: 16,),
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Shimmer.fromColors(
+                        baseColor: Colors.grey.shade200,
+                        highlightColor: Colors.grey.shade100,
+                        enabled: true,
+                        child: Container(
+                          height: 10,
+                          width: 40,
+                          color: Colors.grey.shade200,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
