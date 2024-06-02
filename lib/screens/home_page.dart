@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:prodigit_test/models/product.dart';
+import 'package:prodigit_test/screens/login_page.dart';
 import 'package:prodigit_test/screens/product_details_page.dart';
 import 'package:prodigit_test/services/api_service.dart';
+import 'package:prodigit_test/services/authentication_service.dart';
 import 'package:prodigit_test/utils/colors.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,6 +16,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late Future<List<Product>> futureProductList;
+
+  final AuthenticationService _authService = AuthenticationService();
+
+  final user = FirebaseAuth.instance.currentUser!;
+
+  void _signOut({required Function onSingOut}) async {
+    await _authService.signOut();
+    onSingOut();
+  }
 
   @override
   void initState() {
@@ -32,6 +44,46 @@ class _HomePageState extends State<HomePage> {
           style: Theme.of(context).textTheme.headlineMedium,
         ),
         centerTitle: true,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: InkWell(
+              onTap: (){
+                showMenu(
+                  color: secondaryBackgroundColor,
+                    context: context,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    position: RelativeRect.fromLTRB(MediaQuery.sizeOf(context).width - 50, 0, 0, 0),
+                    items: <PopupMenuEntry>[
+                      const PopupMenuItem(
+                          value: 'logout',
+                          child: Text("Logout"),
+                      ),
+                    ]
+                ).then((value){
+                  if(value == 'logout'){
+                    _signOut(
+                      onSingOut: (){
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => const LoginPage()),
+                        );
+                      }
+                    );
+                  }
+                });
+              },
+              child: CircleAvatar(
+                radius: 21,
+                backgroundImage: user.photoURL != null ? NetworkImage(user.photoURL!)
+                : const AssetImage('assets/images/user.png',),
+
+              ),
+            ),
+          ),
+
+          
+        ],
       ),
       body: FutureBuilder<List<Product>>(
         future: futureProductList,
